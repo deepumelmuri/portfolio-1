@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: black;
+            color: blue;
+        }
+
+        #balance {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+       
+        
+        
+        <input type="number" id="depositAmount">
+        <button onclick="deposit()">Deposit</button>
+
+      
+        <input type="number" id="withdrawAmount">
+        <button onclick="withdraw()">Withdraw</button>
+
+        <button id="checkBalance">Check Balance</button>
+        <p id="balance">Your Balance: $0.00</p>
+    </div>
+
+    <script>
+        let balance = 0;
+
+        function deposit() {
+            const depositAmount = parseFloat(document.getElementById("depositAmount").value);
+            if (!isNaN(depositAmount)) {
+                balance += depositAmount;
+                updateBalance();
+            }
+        }
+
+        function withdraw() {
+            const withdrawAmount = parseFloat(document.getElementById("withdrawAmount").value);
+            if (!isNaN(withdrawAmount) && withdrawAmount <= balance) {
+                balance -= withdrawAmount;
+                updateBalance();
+            }
+        }
+
+        function updateBalance() {
+            const balanceDisplay = document.getElementById("balance");
+            balanceDisplay.textContent = `Your Balance: $${balance.toFixed(2)}`;
+        }
+
+        document.getElementById("checkBalance").addEventListener("click", updateBalance);
+    </script>
+</body>
+</html>
